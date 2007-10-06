@@ -1,0 +1,25 @@
+---
+name: Test-Filenames
+version: 0.01
+author:
+  - 'David A. Golden <dagolden@cpan.org>'
+abstract: Portable tests for filenames
+license: apache
+resources:
+  license: http://apache.org/licenses/LICENSE-2.0
+requires:
+  File::Basename: 0
+  File::Spec: 3.19
+  Test::More: 0.62
+provides:
+  Test::Filenames:
+    file: lib/Test/Filenames.pm
+    version: 0.01
+generated_by: Module::Build version 0.2808
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
+no_index:
+  directory:
+    - examples
+    - inc
