@@ -4,7 +4,7 @@ eval "require Pod::WikiDoc";
 my $class = $@ ? "Module::Build" : "Module::Build::WikiDoc";
 eval "require $class";
 $class->new( 
-    module_name         => 'Test::Filenames',
+    module_name         => 'Test::Filename',
     dist_author         => 'David A. Golden <dagolden@cpan.org>',
     license             => 'apache',
     create_readme       => 1,

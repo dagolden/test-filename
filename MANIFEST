@@ -2,8 +2,8 @@ Build.PL
 Changes
 inc/Module/Build/WikiDoc.pm
 INSTALL
-lib/Test/Filenames.pm
-lib/Test/Filenames.pod
+lib/Test/Filename.pm
+lib/Test/Filename.pod
 LICENSE
 MANIFEST			This list of files
 MANIFEST.SKIP
