@@ -22,23 +22,22 @@ my $CLASS = __PACKAGE__;
 
 sub filename_is {
     my($got, $expected, $label) = @_;
-    return $CLASS->builder->is_eq(_path($got), _path($expected), $label);
+    return $CLASS->builder->is_eq(_path($got), $expected, $label);
 }
 
 sub filename_isnt {
     my($got, $expected, $label) = @_;
-    return $CLASS->builder->isnt_eq(_path($got), _path($expected), $label);
+    return $CLASS->builder->isnt_eq(_path($got), $expected, $label);
 }
 
 #--------------------------------------------------------------------------#
 # private functions
 #--------------------------------------------------------------------------#
 
-my $path_sep = quotemeta($Config{path_sep});
-
 sub _path {
     my ($path) = @_;
-    $path =~ s{$path_sep}{/}g;
+    return $path unless $^O =~ m{^MS};
+    $path =~ s{\\}{/}g;
     return $path;
 }
 
