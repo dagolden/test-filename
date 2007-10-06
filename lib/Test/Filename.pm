@@ -27,8 +27,8 @@ sub import {
     my ($self, @args) = @_;
     my $pack = caller;
 
-    $Test->exported_to($pack);
-    $Test->plan(@_);
+    $TB->exported_to($pack);
+    $TB->plan(@args) if @args;
 
     $self->export_to_level(1, $self, $_) for @EXPORT;
 }
@@ -38,7 +38,8 @@ sub import {
 #--------------------------------------------------------------------------#
 
 sub filename_is {
-
+    my($got, $expected, $label) = @_;
+    $TB->is_eq(canonpath($got), canonpath($expected), $label);
 }
 
 sub filename_isnt {

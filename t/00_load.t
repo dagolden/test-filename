@@ -21,9 +21,9 @@ require_ok( 'Test::Filename' );
 
 can_ok( 'Test::Filename', $_ ) for @api;
 
-package Foo;
+package ThisPackage;
 
 Test::Filename->import();
 
-can_ok( 'Foo', $_ ) for @api;
+main::can_ok( 'ThisPackage', $_ ) for @api;
 
