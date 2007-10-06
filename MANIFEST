@@ -1,5 +1,6 @@
 Build.PL
 Changes
+examples/simple.t
 inc/Module/Build/WikiDoc.pm
 INSTALL
 lib/Test/Filename.pm
