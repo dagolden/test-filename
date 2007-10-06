@@ -4,12 +4,13 @@ WriteMakefile
 (
           'PL_FILES' => {},
           'INSTALLDIRS' => 'site',
-          'NAME' => 'Test::Filenames',
+          'NAME' => 'Test::Filename',
           'EXE_FILES' => [],
-          'VERSION_FROM' => 'lib/Test/Filenames.pm',
+          'VERSION_FROM' => 'lib/Test/Filename.pm',
           'PREREQ_PM' => {
                            'Test::More' => '0.62',
                            'File::Spec' => '3.19',
+                           'Test::Tester' => '0.08',
                            'File::Basename' => 0
                          }
         )

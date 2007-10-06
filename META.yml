@@ -1,5 +1,5 @@
 ---
-name: Test-Filenames
+name: Test-Filename
 version: 0.01
 author:
   - 'David A. Golden <dagolden@cpan.org>'
@@ -11,9 +11,11 @@ requires:
   File::Basename: 0
   File::Spec: 3.19
   Test::More: 0.62
+build_requires:
+  Test::Tester: 0.08
 provides:
-  Test::Filenames:
-    file: lib/Test/Filenames.pm
+  Test::Filename:
+    file: lib/Test/Filename.pm
     version: 0.01
 generated_by: Module::Build version 0.2808
 meta-spec:

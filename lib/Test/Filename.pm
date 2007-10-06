@@ -1,7 +1,7 @@
-package Test::Filenames;
+package Test::Filename;
 use strict;
 
-$Test::Filenames::VERSION = '0.01'; 
+$Test::Filename::VERSION = '0.01'; 
 
 use Test::Builder;
 use File::Basename qw/basename/;
@@ -70,7 +70,7 @@ __END__
 
 = NAME
 
-Test::Filenames - Portable tests for filenames
+Test::Filename - Portable tests for filenames
 
 = VERSION
 
@@ -87,7 +87,7 @@ This documentation describes version %%VERSION%%.
 
 Please report any bugs or feature using the CPAN Request Tracker.  
 Bugs can be submitted through the web interface at 
-[http://rt.cpan.org/Dist/Display.html?Queue=Test-Filenames]
+[http://rt.cpan.org/Dist/Display.html?Queue=Test-Filename]
 
 When submitting a bug or request, please include a test-file or a patch to an
 existing test-file that illustrates the bug or desired feature.
