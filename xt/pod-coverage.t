@@ -10,4 +10,13 @@ eval "use Pod::Coverage $min_pc";
 plan skip_all => "Pod::Coverage $min_pc required for testing POD coverage"
     if $@;
 
-all_pod_coverage_ok();
+my @modules = all_modules('lib');
+
+plan tests => scalar @modules; 
+
+for my $mod ( @modules ) {
+    my $doc = "lib/$mod\.pod";
+    $doc =~ s{::}{/}g;
+    pod_coverage_ok( $mod, { pod_from => $doc } );
+}
+

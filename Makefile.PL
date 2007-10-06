@@ -9,9 +9,8 @@ WriteMakefile
           'VERSION_FROM' => 'lib/Test/Filename.pm',
           'PREREQ_PM' => {
                            'Test::More' => '0.62',
-                           'File::Spec' => '3.19',
-                           'Test::Tester' => '0.08',
-                           'File::Basename' => 0
+                           'File::Spec' => 0,
+                           'Test::Tester' => '0.08'
                          }
         )
 ;

@@ -9,8 +9,6 @@ use Test::More;
 my @api = qw(
     filename_is
     filename_isnt
-    filename_like
-    filename_unlike
 );
 
 plan tests =>  1 + 2 * @api;

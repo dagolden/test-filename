@@ -3,15 +3,14 @@ name: Test-Filename
 version: 0.01
 author:
   - 'David A. Golden <dagolden@cpan.org>'
-abstract: Portable tests for filenames
+abstract: Portable filename comparison
 license: apache
 resources:
   license: http://apache.org/licenses/LICENSE-2.0
 requires:
-  File::Basename: 0
-  File::Spec: 3.19
   Test::More: 0.62
 build_requires:
+  File::Spec: 0
   Test::Tester: 0.08
 provides:
   Test::Filename:

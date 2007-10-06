@@ -1,37 +1,20 @@
 package Test::Filename;
+use 5.004;
 use strict;
+use vars qw/$VERSION @ISA @EXPORT/;
+use Config;
+use Test::Builder::Module;
 
-$Test::Filename::VERSION = '0.01'; 
-
-use Test::Builder;
-use File::Basename qw/basename/;
-use File::Spec::Functions qw/canonpath/;
-
-use vars qw/@ISA @EXPORT/;
-use Exporter ();
-BEGIN { @ISA = qw/Exporter/ }
-@EXPORT = qw(
-    filename_is 
-    filename_isnt
-    filename_like
-    filename_unlike
-);
-
-my $TB = Test::Builder->new();
-
-#--------------------------------------------------------------------------#
-# import -- cribbed from Test::Builder
-#--------------------------------------------------------------------------#
-
-sub import {
-    my ($self, @args) = @_;
-    my $pack = caller;
-
-    $TB->exported_to($pack);
-    $TB->plan(@args) if @args;
-
-    $self->export_to_level(1, $self, $_) for @EXPORT;
+BEGIN { 
+    $VERSION = '0.01'; 
+    @ISA = qw/Test::Builder::Module/; 
+    @EXPORT = qw(
+        filename_is 
+        filename_isnt
+    ); 
 }
+
+my $CLASS = __PACKAGE__;
 
 #--------------------------------------------------------------------------#
 # public API
@@ -39,24 +22,25 @@ sub import {
 
 sub filename_is {
     my($got, $expected, $label) = @_;
-    $TB->is_eq(canonpath($got), canonpath($expected), $label);
+    return $CLASS->builder->is_eq(_path($got), _path($expected), $label);
 }
 
 sub filename_isnt {
-
-}
-
-sub filename_like {
-
-}
-
-sub filename_unlike {
-
+    my($got, $expected, $label) = @_;
+    return $CLASS->builder->isnt_eq(_path($got), _path($expected), $label);
 }
 
 #--------------------------------------------------------------------------#
 # private functions
 #--------------------------------------------------------------------------#
+
+my $path_sep = quotemeta($Config{path_sep});
+
+sub _path {
+    my ($path) = @_;
+    $path =~ s{$path_sep}{/}g;
+    return $path;
+}
 
 
 1; #modules must return true
@@ -71,7 +55,7 @@ __END__
 
 = NAME
 
-Test::Filename - Portable tests for filenames
+Test::Filename - Portable filename comparison
 
 = VERSION
 
@@ -79,10 +63,52 @@ This documentation describes version %%VERSION%%.
 
 = SYNOPSIS
 
+  use Test::Filename tests => 2;
+  
+  filename_is  ( "some\path", "some/path", "should pass" );
+  filename_isnt( "some\path", "some/path", "should fail" );
 
 = DESCRIPTION
 
+Many cross-platform test failures -- particularly on Win32 -- are due to
+hard-coded file paths being used in comparison tests.
+
+  my $file = get_file();     # returns "foo\bar.t";
+  is( $file, "foo/bar.t" );  # fails on Win32
+
+This simple module provides some handy functions to convert all those
+path separators automatically so filename tests will just DWIM.
+
+The alternative is to write your own utility subroutine and use it everywhere
+or just keep on littering your test code with calls to File::Spec -- yuck!
+
+  is( $file, File::Spec->canonpath("some/path"), "should pass" );
+
+Since this module is so simple, you might not think it worth including
+as a {build_requires} dependency.  After all, it's not ~that~ hard to
+always remember to use [File::Spec], right? But odds are that, at some point, 
+you'll be so busy writing tests that you'll forget and hard-code a path in
+your haste to show what a clever programmer you are.
+
+So just use this module and stop worrying about it.  You'll be happier
+and so will anyone trying to install your modules on Win32.
+
 = USAGE
+
+Just like Test::More, you have the option of providing a test plan
+as arguments when you {use} this module. The following functions are 
+imported by default.
+
+== filename_is
+== filename_isnt
+
+    filename_is  ( $got, $expected, $label );
+    filename_isnt( $got, $expected, $label );
+
+These functions work just like {is()} and {isnt()} from Test::More, but
+the first argument will have native path separators converted to forward 
+slashes before comparison.  The {$expected} argument must use unix-style
+forward slashes as path separators.
 
 = BUGS
 
@@ -95,6 +121,9 @@ existing test-file that illustrates the bug or desired feature.
 
 = SEE ALSO
 
+* [perlport]
+* [File::Spec]
+* [Test::More]
 
 = AUTHOR
 

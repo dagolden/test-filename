@@ -10,12 +10,10 @@ $class->new(
     create_readme       => 1,
     create_makefile_pl  => 'traditional',
     requires        => {
-        # module requirements here
-        'File::Basename'        => 0,
-        'File::Spec'            => 3.19,
         'Test::More'            => 0.62, # various features/fixes
     },
     build_requires  => {
+        'File::Spec'            => 0,
         'Test::Tester'          => 0.08,
     },
     meta_add            => { 

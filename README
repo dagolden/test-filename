@@ -1,12 +1,55 @@
 NAME
-    Test::Filename - Portable tests for filenames
+    Test::Filename - Portable filename comparison
 
 VERSION
     This documentation describes version 0.01.
 
 SYNOPSIS
+       use Test::Filename tests => 2;
+ 
+       filename_is  ( "some\path", "some/path", "should pass" );
+       filename_isnt( "some\path", "some/path", "should fail" );
+
 DESCRIPTION
+    Many cross-platform test failures -- particularly on Win32 -- are due to
+    hard-coded file paths being used in comparison tests.
+
+       my $file = get_file();     # returns "foo\bar.t";
+       is( $file, "foo/bar.t" );  # fails on Win32
+
+    This simple module provides some handy functions to convert all those
+    path separators automatically so filename tests will just DWIM.
+
+    The alternative is to write your own utility subroutine and use it
+    everywhere or just keep on littering your test code with calls to
+    File::Spec -- yuck!
+
+       is( $file, File::Spec->canonpath("some/path"), "should pass" );
+
+    Since this module is so simple, you might not think it worth including
+    as a "build_requires" dependency. After all, it's not *that* hard to
+    always remember to use File::Spec, right? But odds are that, at some
+    point, you'll be so busy writing tests that you'll forget and hard-code
+    a path in your haste to show what a clever programmer you are.
+
+    So just use this module and stop worrying about it. You'll be happier
+    and so will anyone trying to install your modules on Win32.
+
 USAGE
+    Just like Test::More, you have the option of providing a test plan as
+    arguments when you "use" this module. The following functions are
+    imported by default.
+
+  filename_is
+  filename_isnt
+         filename_is  ( $got, $expected, $label );
+         filename_isnt( $got, $expected, $label );
+
+    These functions work just like "is()" and "isnt()" from Test::More, but
+    the first argument will have native path separators converted to forward
+    slashes before comparison. The $expected argument must use unix-style
+    forward slashes as path separators.
+
 BUGS
     Please report any bugs or feature using the CPAN Request Tracker. Bugs
     can be submitted through the web interface at
@@ -16,6 +59,12 @@ BUGS
     to an existing test-file that illustrates the bug or desired feature.
 
 SEE ALSO
+    *   perlport
+
+    *   File::Spec
+
+    *   Test::More
+
 AUTHOR
     David A. Golden (DAGOLDEN)
 

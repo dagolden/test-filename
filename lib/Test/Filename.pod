@@ -4,7 +4,7 @@
 
 =head1 NAME
 
-Test::Filename - Portable tests for filenames
+Test::Filename - Portable filename comparison
 
 =head1 VERSION
 
@@ -12,9 +12,53 @@ This documentation describes version 0.01.
 
 =head1 SYNOPSIS
 
+   use Test::Filename tests => 2;
+ 
+   filename_is  ( "some\path", "some/path", "should pass" );
+   filename_isnt( "some\path", "some/path", "should fail" );
+
 =head1 DESCRIPTION
 
+Many cross-platform test failures -- particularly on Win32 -- are due to
+hard-coded file paths being used in comparison tests.
+
+   my $file = get_file();     # returns "foo\bar.t";
+   is( $file, "foo/bar.t" );  # fails on Win32
+
+This simple module provides some handy functions to convert all those
+path separators automatically so filename tests will just DWIM.
+
+The alternative is to write your own utility subroutine and use it everywhere
+or just keep on littering your test code with calls to File::Spec -- yuck!
+
+   is( $file, File::Spec->canonpath("some/path"), "should pass" );
+
+Since this module is so simple, you might not think it worth including
+as a C<<< build_requires >>> dependency.  After all, it's not I<that> hard to
+always remember to use L<File::Spec>, right? But odds are that, at some point, 
+you'll be so busy writing tests that you'll forget and hard-code a path in
+your haste to show what a clever programmer you are.
+
+So just use this module and stop worrying about it.  You'll be happier
+and so will anyone trying to install your modules on Win32.
+
 =head1 USAGE
+
+Just like Test::More, you have the option of providing a test plan
+as arguments when you C<<< use >>> this module. The following functions are 
+imported by default.
+
+=head2 filename_is
+
+=head2 filename_isnt
+
+     filename_is  ( $got, $expected, $label );
+     filename_isnt( $got, $expected, $label );
+
+These functions work just like C<<< is() >>> and C<<< isnt() >>> from Test::More, but
+the first argument will have native path separators converted to forward 
+slashes before comparison.  The C<<< $expected >>> argument must use unix-style
+forward slashes as path separators.
 
 =head1 BUGS
 
@@ -26,6 +70,22 @@ When submitting a bug or request, please include a test-file or a patch to an
 existing test-file that illustrates the bug or desired feature.
 
 =head1 SEE ALSO
+
+=over
+
+=item *
+
+L<perlport>
+
+=item *
+
+L<File::Spec>
+
+=item *
+
+L<Test::More>
+
+=back
 
 =head1 AUTHOR
 
