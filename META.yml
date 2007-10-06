@@ -1,6 +1,6 @@
 ---
 name: Test-Filename
-version: 0.01
+version: 0.02
 author:
   - 'David A. Golden <dagolden@cpan.org>'
 abstract: Portable filename comparison
@@ -15,7 +15,7 @@ build_requires:
 provides:
   Test::Filename:
     file: lib/Test/Filename.pm
-    version: 0.01
+    version: 0.02
 generated_by: Module::Build version 0.2808
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

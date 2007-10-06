@@ -1,5 +1,9 @@
 Revision history for Perl module Test::Filename
 
+0.02 Sat Oct  6 13:28:46 EDT 2007
+
+    - Fixes bug on win32 (PIBK)
+
 0.01 Sat Oct  6 11:00:40 EDT 2007
 
     - initial release with filename_is() and filename_isnt()

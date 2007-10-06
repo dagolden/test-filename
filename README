@@ -2,7 +2,7 @@ NAME
     Test::Filename - Portable filename comparison
 
 VERSION
-    This documentation describes version 0.01.
+    This documentation describes version 0.02.
 
 SYNOPSIS
        use Test::Filename tests => 2;

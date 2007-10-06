@@ -6,7 +6,7 @@ use Config;
 use Test::Builder::Module;
 
 BEGIN { 
-    $VERSION = '0.01'; 
+    $VERSION = '0.02'; 
     @ISA = qw/Test::Builder::Module/; 
     @EXPORT = qw(
         filename_is 
