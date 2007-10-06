@@ -15,6 +15,9 @@ $class->new(
         'File::Spec'            => 3.19,
         'Test::More'            => 0.62, # various features/fixes
     },
+    build_requires  => {
+        'Test::Tester'          => 0.08,
+    },
     meta_add            => { 
         no_index => { 
             directory => [ qw{

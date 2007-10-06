@@ -3,13 +3,55 @@ use strict;
 
 $Test::Filenames::VERSION = '0.01'; 
 
-use File::Basename qw/basename/;
 use Test::Builder;
+use File::Basename qw/basename/;
 use File::Spec::Functions qw/canonpath/;
+
+use vars qw/@ISA @EXPORT/;
+use Exporter ();
+BEGIN { @ISA = qw/Exporter/ }
+@EXPORT = qw(
+    filename_is 
+    filename_isnt
+    filename_like
+    filename_unlike
+);
+
+my $TB = Test::Builder->new();
+
+#--------------------------------------------------------------------------#
+# import -- cribbed from Test::Builder
+#--------------------------------------------------------------------------#
+
+sub import {
+    my ($self, @args) = @_;
+    my $pack = caller;
+
+    $Test->exported_to($pack);
+    $Test->plan(@_);
+
+    $self->export_to_level(1, $self, $_) for @EXPORT;
+}
 
 #--------------------------------------------------------------------------#
 # public API
 #--------------------------------------------------------------------------#
+
+sub filename_is {
+
+}
+
+sub filename_isnt {
+
+}
+
+sub filename_like {
+
+}
+
+sub filename_unlike {
+
+}
 
 #--------------------------------------------------------------------------#
 # private functions
