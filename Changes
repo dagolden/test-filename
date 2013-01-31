@@ -2,6 +2,8 @@ Revision history for Perl module Test::Filename
 
 {{$NEXT}}
 
+0.03      2013-01-31 16:13:17 America/New_York
+
     - Now converts both comparison arguments and does so with
       Path::Tiny to handle minor details like "./foo" being
       the same as "foo"
