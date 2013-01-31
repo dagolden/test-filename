@@ -1,4 +1,0 @@
-severity = 4
-
-exclude = ProhibitStringyEval RequireUseWarnings
-include = Lax::ProhibitStringyEvalExceptForRequire
