@@ -6,7 +6,7 @@ Test::Filename - Portable filename comparison
 
 =head1 VERSION
 
-version 0.001
+version 0.03
 
 =head1 SYNOPSIS
 
